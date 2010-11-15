@@ -14,9 +14,9 @@ my $STDERR = q{};
 open *STDERR, '>', \$STDERR;
 
 my $x = 0;
-### require: $x < 1
+### insist: $x < 1
 
-ok length $STDERR == 0           => 'True require is silent';
+ok length $STDERR == 0           => 'True insist is silent';
 
 $ASSERTION = << 'END_ASSERT';
 
@@ -27,11 +27,11 @@ END_ASSERT
 $ASSERTION =~ s/#/###/g;
 
 eval {
-### require: $x < 0
+### insist: $x < 0
 };
 
-ok $@                            => 'False require is deadly';
-ok $@ eq "\n"                    => 'False require is deadly silent';
+ok $@                            => 'False insist is deadly';
+ok $@ eq "\n"                    => 'False insist is deadly silent';
 
 # Conway fudges the relatively stable file name 
 #	but not the unstable line number. 
@@ -39,8 +39,8 @@ ok $@ eq "\n"                    => 'False require is deadly silent';
 #~ $STDERR =~ s/ at \S+ line / at FILE line /;
 $STDERR =~ s/ at \S+ line \d\d/ at FILE line 00/;
 
-ok length $STDERR != 0           => 'False require is loud';
-is $STDERR, $ASSERTION           => 'False require is loudly correct';
+ok length $STDERR != 0           => 'False insist is loud';
+is $STDERR, $ASSERTION           => 'False insist is loudly correct';
 
 close *STDERR;
 $STDERR = q{};
@@ -59,14 +59,14 @@ END_ASSERTION2
 $ASSERTION2 =~ s/#/###/g;
 
 eval {
-### require: $y < $x
+### insist: $y < $x
 };
 
-ok $@                            => 'False two-part require is deadly';
-ok $@ eq "\n"                    => 'False two-part require is deadly silent';
+ok $@                            => 'False two-part insist is deadly';
+ok $@ eq "\n"                    => 'False two-part insist is deadly silent';
 
 #~ $STDERR =~ s/ at \S+ line / at FILE line /;
 $STDERR =~ s/ at \S+ line \d\d/ at FILE line 00/;
 
-ok length $STDERR != 0           => 'False two-part require is loud';
-is $STDERR, $ASSERTION2          => 'False two-part require is loudly correct';
+ok length $STDERR != 0           => 'False two-part insist is loud';
+is $STDERR, $ASSERTION2          => 'False two-part insist is loudly correct';

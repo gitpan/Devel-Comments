@@ -1,12 +1,5 @@
-#!/run/bin/perl
 
-use lib qw{
-	      lib
-	   ../lib
-	../../lib
-};
-
-BEGIN { $ENV{Smart_Comments} = 1; }
+BEGIN { $ENV{Devel_Comments} = 1; }
 
 use Devel::Comments -ENV;
 use Test::More 'no_plan';

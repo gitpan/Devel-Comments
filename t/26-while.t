@@ -14,13 +14,15 @@ my $STDERR = q{};
 open *STDERR, '>', \$STDERR;
 
 my $count = 0;
-for my $ivar (1..3) {    ### Simple for loop:===|   done
+
+LABEL:
+
+while ($count < 100) {    ### Simple while loop:===|   done
     $count++;
-    is $ivar, $count                        => "Iteration $count";
 }
 
-like $STDERR, qr/Simple for loop:|                   done\r/
+like $STDERR, qr/Simple while loop:|                 done\r/
                                             => 'First iteration';
 
-like $STDERR, qr/Simple for loop:=========|          done\r/
+like $STDERR, qr/Simple while loop:=|                done\r/ 
                                             => 'Second iteration';

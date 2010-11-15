@@ -14,9 +14,9 @@ my $STDERR = q{};
 open *STDERR, '>', \$STDERR;
 
 my $x = 0;
-### require: $x < 1
+### assert: $x < '1'
 
-ok length $STDERR == 0           => 'True require is silent';
+ok length $STDERR == 0           => 'True assertion is silent';
 
 $ASSERTION = << 'END_ASSERT';
 
@@ -27,20 +27,20 @@ END_ASSERT
 $ASSERTION =~ s/#/###/g;
 
 eval {
-### require: $x < 0
+### assert: $x < 0
 };
 
-ok $@                            => 'False require is deadly';
-ok $@ eq "\n"                    => 'False require is deadly silent';
+ok $@                            => 'False assertion is deadly';
+ok $@ eq "\n"                    => 'False assertion is deadly silent';
 
 # Conway fudges the relatively stable file name 
 #	but not the unstable line number. 
 # For ::Any, we fudge both. 
 #~ $STDERR =~ s/ at \S+ line / at FILE line /;
-$STDERR =~ s/ at \S+ line \d\d/ at FILE line 00/;
+$STDERR =~ s/ at \S+ line \d[\d]*/ at FILE line 00/;
 
-ok length $STDERR != 0           => 'False require is loud';
-is $STDERR, $ASSERTION           => 'False require is loudly correct';
+ok length $STDERR != 0           => 'False assertion is loud';
+is $STDERR, $ASSERTION           => 'False assertion is loudly correct';
 
 close *STDERR;
 $STDERR = q{};
@@ -59,14 +59,16 @@ END_ASSERTION2
 $ASSERTION2 =~ s/#/###/g;
 
 eval {
-### require: $y < $x
+### assert: $y < $x
 };
 
-ok $@                            => 'False two-part require is deadly';
-ok $@ eq "\n"                    => 'False two-part require is deadly silent';
+ok $@                            => 'False two-part assertion is deadly';
+ok $@ eq "\n"                    => 'False two-part assertion is deadly silent';
 
 #~ $STDERR =~ s/ at \S+ line / at FILE line /;
 $STDERR =~ s/ at \S+ line \d\d/ at FILE line 00/;
 
-ok length $STDERR != 0           => 'False two-part require is loud';
-is $STDERR, $ASSERTION2          => 'False two-part require is loudly correct';
+ok length $STDERR != 0           => 'False two-part assertion is loud';
+is $STDERR, $ASSERTION2          => 'False two-part assertion is loudly correct';
+
+

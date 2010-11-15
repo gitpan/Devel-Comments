@@ -14,6 +14,9 @@ my $STDERR = q{};
 open *STDERR, '>', \$STDERR;
 
 my $count = 0;
+
+LABEL:
+
 for my $ivar (1..3) {    ### Simple for loop:===|   done
     $count++;
     is $ivar, $count                        => "Iteration $count";
