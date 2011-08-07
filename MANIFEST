@@ -27,6 +27,7 @@ t/37-verify.t
 t/41-message.t
 t/51-selective.t
 t/61-var.t
+t/62-labeled.t
 t/71-ENV_0.t
 t/72-ENV_1.t
 t/73-DC_ENV_1.t
@@ -61,6 +62,7 @@ t/all/41-message.t
 t/all/42-simple-for.t
 t/all/51-selective.t
 t/all/61-var.t
+t/all/62-labeled.t
 t/all/71-ENV_0.t
 t/all/72-ENV_1.t
 t/all/73-DC_ENV_1.t
